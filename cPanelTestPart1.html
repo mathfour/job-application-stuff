@@ -63,12 +63,12 @@
 
         <ul class="nobullet">
     	     <li>
-             <label for="username">
+             <label for="userName">
                Desired user name
              </label>
              <input type="text"
-                    id="username"
-                    name="username"
+                    id="userName"
+                    name="userName"
                     value="" />
            </li><!--must contain a lower and upper case letter and at least 1 number. Cannot contain special characters -->
 
@@ -107,22 +107,11 @@
 
     </div>
     <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(){ // Handler when the DOM is fully loaded
-      console.log(form.username.value);
-      // function checkUserName() {
-      //   if (form.username.value == "asdf") {
-      //     console.log("this is working");
-      //   }
-      // }
-
-
-      // document.getElementById("#submit_btn").on("click")
-      // document.getElementById("loginform").submit();
-
-      // function sUbmitTheForm() {
-      //   // var name = document.getElementById("username").value;
+      document.addEventListener("DOMContentLoaded", function(){ // when the DOM is fully loaded
 
             document.getElementById("submit_btn").onclick = function (){
+              var userName = document.getElementById("userName").value;
+                console.log(userName);
               if (vAlidation()) {
                 document.getElementById("loginform").submit();
                 console.log("it's working");
@@ -136,21 +125,60 @@
 
             function vAlidation() {
               console.log("this is getting validated");
-              var uSername = document.getElementById("username").value;
-              if (uSername === "asdf") {
-                console.log("it's asdf");
-                alert("it's asdf");
-                return true;
-              }
-              else {
-                console.log("it's NOT asdf");
-                alert("it's NOT asdf");
-                return false;
-              }
-            }
+              var userName = document.getElementById("userName").value;
+                console.log("userName is " + userName);
+                if (goodChars(userName) && !badChars(userName)) {
+                  console.log("it's all good");
+                }
+            }; // end of function vAlidation()
 
-      // sUbmitTheForm();
-    });
+
+              // var allCheck = new RegExp('[^A-Z] |')
+
+              function badChars() {
+                var specialCheck = new RegExp(/\W/);
+                var underscoreCheck = /_/;
+                if (userName.match(specialCheck)) {
+                  console.log("we have a non word character");
+                  return false;
+                } // end of if (userName.match(specialCheck))
+                else { // Fred
+                  if (userName.match(underscoreCheck)) {
+                    console.log("we have a DASH!");
+                    return false;
+                  } // end of if (userName.match(underscoreCheck))
+                  else { // Marsha
+                    return true;
+                  }; // end of else Marsha
+                }; // end of else Fred
+              } // end of function badChars()
+
+            var capLetterCheck = new RegExp('[A-Z]');
+            var letterCheck = new RegExp('[a-z]');
+            var numberCheck = new RegExp('[0-9]');
+
+                  if (userName.match(capLetterCheck)) {
+                    console.log("we have caps");
+                    if (userName.match(letterCheck)) {
+                      console.log("we have letters");
+                      if (userName.match(numberCheck)) {
+                        console.log("we have numbers");
+                        return true;
+                      }
+                      else {
+                        return false;
+                      };
+                    }
+                    else {
+                      return false;
+                    };
+                  }
+                    else {
+                      return false;
+                    };
+
+
+      }); // end of document.addEventListener("DOMContentLoaded", function()
     </script>
   </body>
 </html>
