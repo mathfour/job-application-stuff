@@ -54,6 +54,41 @@
     <h2>Part 4: Flickr Photos</h2>
     <p>Click on the button to see where it's _______.</p>
     <input type="button" id="flickrpics" value="Show Pictures" />
+
+    <div id="feed" />
+
+    <script type="text/javascript">
+
+    function jsonFlickrFeed (feed) {
+      var feed_div = document.getElementById("feed");
+      var feed_html = '<p>' + '<a href="' + feed.link+ '">' +
+        feed.title + '</a>'+ '</p>';
+      for (x=0; x<feed.items.length; x++) {
+        feed_html += '<a href="' + feed.items[x].link + '">' +
+          '<img ' + 'src="' + feed.items[x].media["m"] + '"' + ' alt="' +
+          feed.items[x].title + '"' + '/>' + '</a>'+ '<br/>';
+      }
+      feed_div.innerHTML = feed_html;
+    }
+
+    function load() {
+      var head_element = document.getElementsByTagName("head")[0];
+      var newScript = document.createElement('script');
+      newScript.type = 'text/javascript';
+      newScript.src = 'http://api.flickr.com/services/feeds/photos_public.gne?tags=tree&format=json';
+      head_element.appendChild(newScript);
+    }
+
+    document.getElementById("flickrpics").onclick = function (){
+      load();
+      console.log("button works");
+    };
+
+    </script>
+
+
+
+
 </body>
 
 </html>

@@ -53,6 +53,7 @@
 
     <br /><br />
     <script type="text/javascript">
+
         var thisArray = ['T', 'h', 'a', 'i', 's', 'b', ' ', 'i', 'c', 's', ' ', 'a', 't', 'h', 'e', 'e', ' ', 't', 's', 'o', 'r', 'n', 'g', 't', ' ', 't', 'n', 'h', 'a', 's', 't', ' ', 'o', 'n', 'e', 'o', 'v', 'e', 'a', 'r', ' ', 'f', 'e', 'n', 'a',
             'd', 's', 'p', ',', ' ', 'p', 'y', 'e', 'i', 's', ' ', 'p', 'i', 't', 'o', ' ', 'g', ' ', 'o', 'e', 'i', 's', ' ', 't', 'o', 'n', 'e', ' ', 'a', ' ', 'n', 'd', ' ', ' ', 'o', 'i', 'n', ' ', 'a', 'm', 'y', ' ', ' ', 'f', 'a', 'r', 'i',
             ' ', 'e', 'n', 'o', 'd', 's', 'i', ' ', 'S', ' ', 'o', 'm', 'a', 'e', ' ', 'a', 'p', 'e', ' ', 'o', 'p', 'a', 'l', 'e', 'r', ' ', 's', ' ', 't', 'a', 'a', 'r', 't', ' ', 'e', 'd', 'u', ' ', 's', ' ', 'i', 'n', 'g', 'g', 'i', ' ', 'n',
@@ -60,11 +61,28 @@
             'n', 'd', 'a', ' ', 't', 'o', 'h', 'e', ' ', 'y', ' ', 'a', 'w', 'i', 'p', 'l', 'l', 'o', ' ', 'c', 'r', 'o', 'n', ' ', 't', 'i', 'p', 'n', 'u', 'i', 'e', ' ', 't', 's', 'i', ' ', 'n', 'g', ' ', 'i', 'n', ' ', 'g', ' ', 's', 'i', 't',
             'h', ' ', 'f', 'r', 'o', 'r', ' ', 'e', 'v', 't', 'e', 'r', 't', ' ', 'j', 'u', 'u', 's', 't', 't', ' ', 'a', 'b', 'e', 'l', 'c', 'a', ' ', 'u', 's', 'l', 'e'
         ];
-        var len = thisArray.length;
+
+        var len = thisArray.length-1;
+
+        // If we count and delete from the front, we get off count right at the beginning
+        // because the new array is no longer indexed how we planned.
+        // Instead, we'll count and delete elements from the back so we don't mess up the count.
+        for (var i = len; i > -1; i--) {
+          if (i%3 === 2) {
+            // If the ith letter is unfortunate enough to be in that spot, out it goes!
+            thisArray.splice(i,1);
+          }
+        }
+
+        // Let's look at it...
         document.write("<br /><h2>Part 3: The Array:</h2>");
-        for (var i = 1; i <= len; i++) {
+
+        // This original for-loop started at 1, but that chops off the first letter when
+        // we write it to the screen - and that's no fun at all!
+        for (var i = 0; i <= len; i++) {
             document.write(thisArray[i]);
         }
+
     </script>
     <br /><br />
 

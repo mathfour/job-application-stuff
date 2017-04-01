@@ -118,8 +118,8 @@
                 alert("it's working");
               }
               else {
-                console.log("it's not working");
-                alert("its not working");
+                console.log("it's not working 283");
+                alert("its not working 283");
               };
             };
 
@@ -127,55 +127,65 @@
               console.log("this is getting validated");
               var userName = document.getElementById("userName").value;
                 console.log("userName is " + userName);
-                if (goodChars(userName) && !badChars(userName)) {
+                console.log(goodChars(userName));
+                console.log(badChars(userName));
+
+                var allGood1 = goodChars(userName);
+                  console.log(allGood1);
+                var allGood2 = !badChars(userName);
+                  console.log(allGood2);
+                if (allGood1 && allGood2) {
                   console.log("it's all good");
+                  return true;
+                }
+                else {
+                  return false;
                 }
             }; // end of function vAlidation()
 
 
-              // var allCheck = new RegExp('[^A-Z] |')
-
-              function badChars() {
+              function badChars(wordForTesting) {
                 var specialCheck = new RegExp(/\W/);
                 var underscoreCheck = /_/;
-                if (userName.match(specialCheck)) {
+                if (wordForTesting.match(specialCheck)) {
                   console.log("we have a non word character");
+                  return true;
+                } // end of if (wordForTesting.match(specialCheck))
+                else if (wordForTesting.match(underscoreCheck)) {
+                  console.log("we have a DASH!");
+                  return true;
+                } // end of else if (wordForTesting.match(underscoreCheck))
+                else { // Marsha
                   return false;
-                } // end of if (userName.match(specialCheck))
-                else { // Fred
-                  if (userName.match(underscoreCheck)) {
-                    console.log("we have a DASH!");
-                    return false;
-                  } // end of if (userName.match(underscoreCheck))
-                  else { // Marsha
-                    return true;
-                  }; // end of else Marsha
-                }; // end of else Fred
-              } // end of function badChars()
+                }; // end of else Marsha
+              }; // end of function badChars()
 
-            var capLetterCheck = new RegExp('[A-Z]');
-            var letterCheck = new RegExp('[a-z]');
-            var numberCheck = new RegExp('[0-9]');
+              function goodChars(wordForTesting) {
 
-                  if (userName.match(capLetterCheck)) {
-                    console.log("we have caps");
-                    if (userName.match(letterCheck)) {
-                      console.log("we have letters");
-                      if (userName.match(numberCheck)) {
-                        console.log("we have numbers");
-                        return true;
-                      }
-                      else {
-                        return false;
-                      };
+                var capLetterCheck = new RegExp('[A-Z]');
+                var letterCheck = new RegExp('[a-z]');
+                var numberCheck = new RegExp('[0-9]');
+
+                if (wordForTesting.match(capLetterCheck)) {
+                  console.log("we have caps");
+                  if (wordForTesting.match(letterCheck)) {
+                    console.log("we have letters");
+                    if (wordForTesting.match(numberCheck)) {
+                      console.log("we have numbers");
+                      return true;
                     }
                     else {
                       return false;
                     };
                   }
-                    else {
-                      return false;
-                    };
+                  else {
+                    return false;
+                  };
+                }
+                  else {
+                    return false;
+                  };
+                } // end of function goodChars(wordForTesting)
 
 
       }); // end of document.addEventListener("DOMContentLoaded", function()
