@@ -114,19 +114,28 @@
 
             document.getElementById("submit_btn").onclick = function (){
               var userName = document.getElementById("userName").value;
-                console.log(userName);
-              if (vAlidation()) {
+                console.log("we show the username is " + userName);
+              var passWord = document.getElementById("password").value;
+                console.log("we show the password is " + passWord);
+              if (validateUserName()) {
                 document.getElementById("loginform").submit();
-                console.log("it's working");
-                alert("it's working");
+                console.log("username is okay");
+                alert("username is okay");
               }
               else {
                 console.log("it's not working 283");
                 alert("its not working 283");
               };
+              if (validatePassWord) {
+                // continue on
+              }
+              else {
+                // reject all and ask for the password again
+              }
+
             };
 
-            function vAlidation() {
+            function validateUserName() {
               console.log("this is getting validated");
               var userName = document.getElementById("userName").value;
                 console.log("userName is " + userName);
@@ -144,9 +153,8 @@
                 else {
                   return false;
                 }
-            }; // end of function vAlidation()
-
-
+            }; // end of function validateUserName()
+              // badChars() is used in validateUserName()
               function badChars(wordForTesting) {
                 var specialCheck = new RegExp(/\W/);
                 var underscoreCheck = /_/;
@@ -162,7 +170,7 @@
                   return false;
                 }; // end of else Marsha
               }; // end of function badChars()
-
+              // goodChars() is used in validateUserName()
               function goodChars(wordForTesting) {
 
                 var capLetterCheck = new RegExp('[A-Z]');
@@ -191,10 +199,20 @@
                 } // end of function goodChars(wordForTesting)
                 // spreadsheet for thoroughly testing that this works: https://docs.google.com/spreadsheets/d/1_mnW95JzcmB3CPrr2wIX1ijIpNymYdBHgcs0hUrkvWM/edit?usp=sharing
 
+            function validatePassWord() {
 
+            }
 
 
       }); // end of document.addEventListener("DOMContentLoaded", function()
+
+
+
+
+
+
+
+
     </script>
   </body>
 </html>

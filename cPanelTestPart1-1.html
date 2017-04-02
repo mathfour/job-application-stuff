@@ -44,7 +44,7 @@
     <div id="intro">
       <h1>cPanel Javascript Skills Assessment</h1>
       <ul>
-    	   <li>Part 1: Add form / input validation to the registrationform div with Javascript. Please do not use a JavaScript library to do form validation.</li>
+    	   <li>Part 1: Add form / input validateInfo to the registrationform div with Javascript. Please do not use a JavaScript library to do form validateInfo.</li>
 
        </ul>
     </div>
@@ -97,7 +97,7 @@
                     id="geoglocation"
                     name="geoglocation"
                     value="" />
-           </li><!--currently no input validation is used as the input validation would be different for US and non-US locations-->
+           </li><!--currently no input validateInfo is used as the input validateInfo would be different for US and non-US locations-->
          </ul>
 
          <input type="submit"
@@ -115,7 +115,7 @@
             document.getElementById("submit_btn").onclick = function (){
               var userName = document.getElementById("userName").value;
                 console.log(userName);
-              if (vAlidation()) {
+              if (validateInfo()) {
                 document.getElementById("loginform").submit();
                 console.log("it's working");
                 alert("it's working");
@@ -126,7 +126,7 @@
               };
             };
 
-            function vAlidation() {
+            function validateInfo() {
               console.log("this is getting validated");
               var userName = document.getElementById("userName").value;
                 console.log("userName is " + userName);
@@ -144,7 +144,7 @@
                 else {
                   return false;
                 }
-            }; // end of function vAlidation()
+            }; // end of function validateInfo()
 
 
               function badChars(wordForTesting) {
