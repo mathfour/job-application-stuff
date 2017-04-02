@@ -37,7 +37,16 @@
             padding: 0;
             cursor: pointer;
         }
+
+        .pixBox {
+          border: solid 1px gray;
+          padding: 10px;
+          /*float: left;*/
+          width: 300px;
+          text-align: center;
+        }
     </style>
+
 </head>
 
 <body>
@@ -54,40 +63,38 @@
     <h2>Part 4: Flickr Photos</h2>
     <p>Click on the button to see where it's _______.</p>
     <input type="button" id="flickrpics" value="Show Pictures" />
-
-    <div id="feed" />
+    <br />
+    <div id="pictures">Click the button to see the pictures!</div>
 
     <script type="text/javascript">
 
-    function jsonFlickrFeed (feed) {
-      var feed_div = document.getElementById("feed");
-      var feed_html = '<p>' + '<a href="' + feed.link+ '">' +
-        feed.title + '</a>'+ '</p>';
-      for (x=0; x<feed.items.length; x++) {
-        feed_html += '<a href="' + feed.items[x].link + '">' +
-          '<img ' + 'src="' + feed.items[x].media["m"] + '"' + ' alt="' +
-          feed.items[x].title + '"' + '/>' + '</a>'+ '<br/>';
+    function jsonFlickrFeed (jsonCodeFeed) {
+      var pixDiv = document.getElementById("pictures");
+      var htmlBits = '<p> <a href="' + jsonCodeFeed.link+ '">' +
+        jsonCodeFeed.title + '</a>'+ '</p>';
+      for (i = 0; i < jsonCodeFeed.items.length; i++) {
+        htmlBits += '<div class="pixBox"' + jsonCodeFeed.items[i].description + '</div><br />';
       }
-      feed_div.innerHTML = feed_html;
+      pixDiv.innerHTML = htmlBits;
     }
 
-    function load() {
+
+
+    function makeItSo() {
       var head_element = document.getElementsByTagName("head")[0];
-      var newScript = document.createElement('script');
-      newScript.type = 'text/javascript';
-      newScript.src = 'http://api.flickr.com/services/feeds/photos_public.gne?tags=tree&format=json';
+      var newScript = document.createElement("script");
+      newScript.type = "text/javascript";
+      // newScript.src = 'http://api.flickr.com/services/feeds/photos_public.gne?tags=tree&format=json';
+      newScript.src = "http://www.flickr.com/services/feeds/photos_public.gne?tags=punctuation,atsign&format=json";
       head_element.appendChild(newScript);
     }
 
     document.getElementById("flickrpics").onclick = function (){
-      load();
+      makeItSo();
       console.log("button works");
     };
 
     </script>
-
-
-
 
 </body>
 

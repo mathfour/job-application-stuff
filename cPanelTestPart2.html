@@ -21,45 +21,6 @@
     <!-- Source file -->
     <script src="http://yui.yahooapis.com/2.9.0/build/container/container-min.js"></script>
 
-    <script type="text/javascript">
-    // var myModule = new YAHOO.widget.Module("myModule");
-    //
-    // myModule.setHeader("This is my header content");
-    // myModule.setBody("This is my body content");
-    // myModule.setFooter("This is my footer content");
-
-
-      myPanel = new YAHOO.widget.Panel("myPanel");
-
-      //The second argument passed to the
-      //constructor is a configuration object:
-      myPanel = new YAHOO.widget.Panel("win", {
-          width: "400px",
-          fixedcenter: true,
-          constraintoviewport: true,
-          underlay: "shadow",
-          close: true,
-          visible: false,
-          draggable: true
-      });
-
-      //If we haven't built our panel using existing markup,
-      //we can set its content via script:
-
-      myPanel.setHeader("The Panel Control");
-      myPanel.setBody("body constrain-to-viewport are easy to configure.");
-       
-      //Although we configured many properties in the
-      //constructor, we can configure more properties or
-      //change existing ones after our Panel has been
-      //instantiated:
-
-      myPanel.cfg.setProperty("underlay","matte");
-
-
-    </script>
-
-
     <style type="text/css">
         label {
             width: 155px;
@@ -118,6 +79,45 @@
     <input type="button" id="findoutmore" value="Find Out More" />
     <br /><br />
     </div>
+
+    
+        <script type="text/javascript">
+        // var myModule = new YAHOO.widget.Module("myModule");
+        //
+        // myModule.setHeader("This is my header content");
+        // myModule.setBody("This is my body content");
+        // myModule.setFooter("This is my footer content");
+
+
+          myPanel = new YAHOO.widget.Panel("myPanel");
+
+          //The second argument passed to the
+          //constructor is a configuration object:
+          myPanel = new YAHOO.widget.Panel("win", {
+              width: "400px",
+              fixedcenter: true,
+              constraintoviewport: true,
+              underlay: "shadow",
+              close: true,
+              visible: false,
+              draggable: true
+          });
+
+          //If we haven't built our panel using existing markup,
+          //we can set its content via script:
+
+          myPanel.setHeader("The Panel Control");
+          myPanel.setBody("body constrain-to-viewport are easy to configure.");
+
+          //Although we configured many properties in the
+          //constructor, we can configure more properties or
+          //change existing ones after our Panel has been
+          //instantiated:
+
+          myPanel.cfg.setProperty("underlay","matte");
+
+
+        </script>
 
 </body>
 
