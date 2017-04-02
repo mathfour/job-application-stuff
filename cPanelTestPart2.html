@@ -18,8 +18,8 @@
     <!-- OPTIONAL: Drag & Drop (only required if enabling Drag & Drop) -->
     <script src="http://yui.yahooapis.com/2.9.0/build/dragdrop/dragdrop-min.js"></script>
 
-    <!-- Source file -->
-    <script src="http://yui.yahooapis.com/2.9.0/build/container/container-min.js"></script>
+    <!-- Source file for YUI-->
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 
     <style type="text/css">
         label {
@@ -55,7 +55,8 @@
     </style>
 </head>
 
-<body>
+<!-- <body> -->
+<body aria-hidden="true">
     <div id="intro">
         <h1>cPanel Javascript Skills Assessment</h1>
         <p>Please complete and return this test as a file attachment. Feel free to remove the test instructions before submitting for a better looking page. To complete this test, you must accomplish the following:</p>
@@ -65,11 +66,11 @@
     </div>
     <div class="yui-skin-sam">
 
-      <div id="myModule">
+      <!-- <div id="myModule">
         <div class="hd"></div>
         <div class="bd"></div>
         <div class="ft"></div>
-      </div>
+      </div> -->
 
 
     <h2>Part 2: cPanel.net</h2>
@@ -80,44 +81,47 @@
     <br /><br />
     </div>
 
-    
-        <script type="text/javascript">
-        // var myModule = new YAHOO.widget.Module("myModule");
-        //
-        // myModule.setHeader("This is my header content");
-        // myModule.setBody("This is my body content");
-        // myModule.setFooter("This is my footer content");
 
+    <div class="yui3-panel" role="alertdialog" aria-labelledby="header" aria-describedby="msg" aria-hidden="false">
+      <div class="yui3-panel-content">
+        <div id="header" class="yui3-widget-hd">Alert</div>
+        <div id="msg" class="yui3-widget-bd">Are you sure you want to submit this form?</div>
+        <div class="yui3-widget-ft">
+          <button type="button">OK</button>
+          <button type="button">Cancel</button>
+        </div>
+      </div>
+    </div>
 
-          myPanel = new YAHOO.widget.Panel("myPanel");
+      <script type="text/javascript">
+        YUI().use('node', 'event', function (Y) {
+            console.log("yui is working");
 
-          //The second argument passed to the
-          //constructor is a configuration object:
-          myPanel = new YAHOO.widget.Panel("win", {
-              width: "400px",
-              fixedcenter: true,
-              constraintoviewport: true,
-              underlay: "shadow",
-              close: true,
-              visible: false,
-              draggable: true
-          });
+            // Access DOM nodes.
+                var oneElementById     = Y.one('#foo'),
+                    oneElementByName   = Y.one('body'),
+                    allElementsByClass = Y.all('.bar');
 
-          //If we haven't built our panel using existing markup,
-          //we can set its content via script:
+                // Create DOM nodes.
+                var contentNode = Y.Node.create('<div>'),
+                    listNode    = Y.Node.create('<ul>'),
+                    footerNode  = Y.Node.create('<footer>');
 
-          myPanel.setHeader("The Panel Control");
-          myPanel.setBody("body constrain-to-viewport are easy to configure.");
+                contentNode.setHTML('<p>Node makes it easy to add content.</p>');
+                listNode.insert('<li>Buy milk</li>');
+                footerNode.prepend('<h2>Footer Content</h2>');
 
-          //Although we configured many properties in the
-          //constructor, we can configure more properties or
-          //change existing ones after our Panel has been
-          //instantiated:
+                // Manipulate DOM nodes.
+                Y.all('.important').addClass('highlight');
 
-          myPanel.cfg.setProperty("underlay","matte");
+                Y.one('#findoutmore').on('click', function () {
+                    console.log("button pushed");
+                    contentNode.hide();
+                });
 
+        });
 
-        </script>
+      </script>
 
 </body>
 

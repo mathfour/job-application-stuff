@@ -61,17 +61,18 @@
 
     <br /><br />
     <h2>Part 4: Flickr Photos</h2>
-    <p>Click on the button to see where it's _______.</p>
+    <p>Click on the button to see where it's _______.</p> <!-- bmc: Clever! (and inspiring - I even uploaded my own atsign!)-->
     <input type="button" id="flickrpics" value="Show Pictures" />
     <br />
-    <div id="pictures">Click the button to see the pictures!</div>
+    <div id="pictures"></div>
 
     <script type="text/javascript">
 
     function jsonFlickrFeed (jsonCodeFeed) {
       var pixDiv = document.getElementById("pictures");
-      var htmlBits = '<p> <a href="' + jsonCodeFeed.link+ '">' +
-        jsonCodeFeed.title + '</a>'+ '</p>';
+      var htmlBits = "<p></p>";
+      // = '<p> <a href="' + jsonCodeFeed.link+ '">' +
+      //   jsonCodeFeed.title + '</a>'+ '</p>';
       for (i = 0; i < jsonCodeFeed.items.length; i++) {
         htmlBits += '<div class="pixBox"' + jsonCodeFeed.items[i].description + '</div><br />';
       }
@@ -84,14 +85,13 @@
       var head_element = document.getElementsByTagName("head")[0];
       var newScript = document.createElement("script");
       newScript.type = "text/javascript";
-      // newScript.src = 'http://api.flickr.com/services/feeds/photos_public.gne?tags=tree&format=json';
       newScript.src = "http://www.flickr.com/services/feeds/photos_public.gne?tags=punctuation,atsign&format=json";
       head_element.appendChild(newScript);
     }
 
+    // click the button and Captain Picard says...
     document.getElementById("flickrpics").onclick = function (){
       makeItSo();
-      console.log("button works");
     };
 
     </script>
