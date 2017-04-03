@@ -6,19 +6,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>cPanel UI Developer Javascript Test</title>
     <!-- Sorry about the inline css. We would normally use external css but wanted to only have a single file for the test -->
-    <!-- Sam Skin CSS -->
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/container/assets/skins/sam/container.css">
-
-    <!-- Dependencies -->
-    <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-
-    <!-- OPTIONAL: Animation (only required if using ContainerEffect) -->
-    <script src="http://yui.yahooapis.com/2.9.0/build/animation/animation-min.js"></script>
-
-    <!-- OPTIONAL: Drag & Drop (only required if enabling Drag & Drop) -->
-    <script src="http://yui.yahooapis.com/2.9.0/build/dragdrop/dragdrop-min.js"></script>
-
-    <!-- Source file for YUI-->
+    <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+    <link href="http://cdn.alloyui.com/3.0.1/aui-css/css/bootstrap.min.css" rel="stylesheet"></link>
     <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 
     <style type="text/css">
@@ -64,8 +53,7 @@
             <li>Part 2: Create a javascript based pop up container using the <a href="http://developer.yahoo.com/yui/">YUI library</a> that displays the contents of http://www.cpanel.net when the <i>Find out More</i> button is activated.</li>
         </ul>
     </div>
-    <div class="yui-skin-sam">
-
+    <br /><br />
       <!-- <div id="myModule">
         <div class="hd"></div>
         <div class="bd"></div>
@@ -78,50 +66,20 @@
         servers. cPanel products are used on tens of thousands of servers worldwide to equip server administrators with the tools they need to provide top notch hosting to their customers. Since our beginnings in 1997, cPanel has been setting the standard
         for web hosting automation.</p>
     <input type="button" id="findoutmore" value="Find Out More" />
-    <br /><br />
-    </div>
 
+    <script type="text/javascript">
+    YUI().use('node', function(Y) {
 
-    <div class="yui3-panel" role="alertdialog" aria-labelledby="header" aria-describedby="msg" aria-hidden="false">
-      <div class="yui3-panel-content">
-        <div id="header" class="yui3-widget-hd">Alert</div>
-        <div id="msg" class="yui3-widget-bd">Are you sure you want to submit this form?</div>
-        <div class="yui3-widget-ft">
-          <button type="button">OK</button>
-          <button type="button">Cancel</button>
-        </div>
-      </div>
-    </div>
+      var button = Y.one("#findoutmore");
 
-      <script type="text/javascript">
-        YUI().use('node', 'event', function (Y) {
-            console.log("yui is working");
+      button.on("click", function (e) {
+          console.log("button clicked");
+          window.open('http://www.cpanel.net', '_blank', 'width=700, height=700');
 
-            // Access DOM nodes.
-                var oneElementById     = Y.one('#foo'),
-                    oneElementByName   = Y.one('body'),
-                    allElementsByClass = Y.all('.bar');
+      });
+    });
 
-                // Create DOM nodes.
-                var contentNode = Y.Node.create('<div>'),
-                    listNode    = Y.Node.create('<ul>'),
-                    footerNode  = Y.Node.create('<footer>');
-
-                contentNode.setHTML('<p>Node makes it easy to add content.</p>');
-                listNode.insert('<li>Buy milk</li>');
-                footerNode.prepend('<h2>Footer Content</h2>');
-
-                // Manipulate DOM nodes.
-                Y.all('.important').addClass('highlight');
-
-                Y.one('#findoutmore').on('click', function () {
-                    console.log("button pushed");
-                    contentNode.hide();
-                });
-
-        });
-
-      </script>
+    </script>
 
 </body>
 
