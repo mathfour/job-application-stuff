@@ -61,9 +61,6 @@
                name="action"
                value="register" />
 
-
-
-
         <ul class="nobullet">
     	     <li>
              <label for="userName">
@@ -116,34 +113,41 @@
             document.getElementById("submit_btn").onclick = function (){
 
               var alertWords = "";
+                console.log("variable alertWords contains: " + alertWords);
 
               if (!validateUserName()) {
                 console.log("username NOT okay");
-                alertWords += "Your username must contain a lower case letter, an upper case letter and a number. Please don't use special characters like  !, @, #, $, *, or _.";
-              }
+                alertWords += "Your username must contain a lower case letter, an upper case letter and a number. Please don't use special characters like  !, @, #, $, *, or _. \n \n";
+                console.log("variable alertWords contains: " + alertWords);
+              };
               if (!validatePassWord()) {
                 console.log("password NOT okay");
-                alertWords += "need better password"; // bmc: need nicer words
-              }
+                alertWords += "Your password should be between 8 and 15 characters and have at least 2 numerals. \n \n"; // bmc: need nicer words
+                console.log("variable alertWords contains: " + alertWords);
+              };
 
               if (!validateUserNumber()) {
                 console.log("usernumber NOT okay");
-                alertWords += "need better usernumber"; // bmc: need nicer words
-              }
+                alertWords += "Your User Number should be exactly 36 digits. \n \n"; // bmc: need nicer words
+                console.log("variable alertWords contains: " + alertWords);
+              };
 
-              if (!validateGeoLoc) {
+              if (!validateGeoLoc()) {
                 console.log("geolocation NOT okay");
-                alertWords += "need better geolocation"; // bmc: need nicer words
-              }
+                alertWords += "Please include a location of some kind - at least 2 characters. \n \n"; // bmc: need nicer words
+                console.log("variable alertWords contains: " + alertWords);
+              };
 
-              if (alertWords = "") {
+              if (alertWords === "") {
                 document.getElementById("loginform").submit();
                 alertWords = "Thank you! Your information has been submitted.";
+                console.log("variable alertWords contains: " + alertWords);
               }
               else {
+                console.log("variable alertWords contains: " + alertWords);
                 alert(alertWords);
+              };
                 // bmc: Would be nice to keep the inputs in the blanks so user can make corrections. Add this if I have time.
-              }
             }; // bmc: end of submit_btn.onclick function
 
             // bmc: These are the functions used in the above onclick function
@@ -161,9 +165,9 @@
                 var itHasCaps = haveCaps(userName);
                   console.log("variable itHasCaps has: " + itHasCaps);
                 var itHasLowers = haveLowers(userName);
-                  console.log(itHasLowers);
+                  console.log("variable itHasLowers has: " + itHasLowers);
                 var itHasNoSpecialChars = !haveSpecialChars(userName);
-                  console.log(itHasNoSpecialChars);
+                  console.log("variable itHasNoSpecialChars has: " + itHasNoSpecialChars);
 
                 if (itHasNumbers && itHasCaps && itHasLowers && itHasNoSpecialChars) {
                   console.log("username all good");
@@ -171,7 +175,7 @@
                 }
                 else {
                   return false;
-                }
+                };
             }; // bmc: end of function validateUserName()
 
 // bmc: ********************* validate password *********************
@@ -181,16 +185,21 @@
                 console.log("password is " + thePassword);
 
                 var itHasXNumbers = haveXNumbers(thePassword, 2);
+                  console.log("the variable itHasXNumbers contains " + itHasXNumbers);
                 var itHasXChars = numberOfChars(thePassword);
+                  console.log("the variable itHasXChars contains " + itHasXChars);
 
-                if ((itHasXChars < 8 || itHasXChars > 15) && itHasXNumbers) {
+                if (itHasXChars > 7 && itHasXChars < 16){
+                  var theRightLength = true;
+                };
+                if (theRightLength && itHasXNumbers) {
+                  console.log("password all good");
                   return true;
                 }
                 else {
                   return false;
                 }
-
-            } // bmc: end of function validatePassWord()
+            }; // bmc: end of function validatePassWord()
 
 // bmc: ********************* validate usernumber *********************
 
@@ -200,15 +209,19 @@
                 console.log("the user number is " + theUserNumber);
 
                 var itHasOnlyNumbers = haveOnlyNumbers(theUserNumber);
+                  console.log("the variable itHasOnlyNumbers contains " + itHasOnlyNumbers);
                 var itHasXChars = numberOfChars(theUserNumber);
+                  console.log("the variable itHasXChars contains " + itHasXChars);
 
                 if (itHasXChars = 36 && itHasOnlyNumbers) {
+                  console.log("we have x characters and only numbers");
+                  console.log("userNUMBER all good");
                   return true;
                 }
                 else {
                   return false;
-                }
-            } // bmc: end of function validateUserNumber()
+                };
+            }; // bmc: end of function validateUserNumber()
 
 // bmc: ********************* validate geolocation *********************
 
@@ -220,19 +233,36 @@
                 var itHasXChars = numberOfChars(theGeoLoc);
 
                 if (itHasXChars > 1) {
+                  console.log("geolocation all good");
                   return true;
                 }
                 else {
                   return false;
-                }
-            } // bmc: end of function validateGeoLoc()
+                };;
+            }; // bmc: end of function validateGeoLoc()
 
 // bmc: ********************* supporting functions *********************
 
             function haveXNumbers(stringForTesting, n) {
-              // bmc: Need this, I'm returning true for now to test the rest
-              return true;
-            }
+              var countTheDigits = 0;
+              for (i = 0; i < stringForTesting.length; i++) {
+                var thisChar = stringForTesting.charAt(i);
+                  if (Number(thisChar) == thisChar) {
+                    console.log("thisChar is " + thisChar);
+                    countTheDigits ++;
+                  };
+                  console.log("countTheDigits " + countTheDigits);
+                };
+                  if (countTheDigits > n-1) {
+                    console.log("we have the right number of digits");
+                    return true;
+                  }
+                  else {
+                    console.log("countTheDigits " + countTheDigits);
+                    console.log("need more digits");
+                    return false;
+                  }
+            };
 
             function haveNumbers(stringForTesting) {
               var numberCheck = new RegExp('[0-9]');
@@ -242,13 +272,19 @@
               }
               else {
                 return false;
-              }
-            }
+              };
+            };
 
-            function haveOnlyNumbers() {
+            function haveOnlyNumbers(stringForTesting) {
               // bmc: Need this, I'm returning true for now to test the rest
-              return true;
-            }
+              if (Number.isInteger(stringForTesting) && stringForTesting > 1) {
+                console.log("number is positive integer");
+                return true;
+              }
+              else {
+                return false;
+              }
+            };
 
             function numberOfChars(stringForTesting) {
               return stringForTesting.length;
@@ -268,7 +304,7 @@
               else {
                 return false;
               };
-            }
+            };
 
 
             function haveCaps(stringForTesting) {
@@ -279,8 +315,8 @@
               }
               else {
                 return false;
-              }
-            }
+              };
+            };
 
             function haveLowers(stringForTesting) {
               var letterCheck = new RegExp('[a-z]');
@@ -290,8 +326,8 @@
               }
               else {
                 return false;
-              }
-            }
+              };
+            };
 
 
 
