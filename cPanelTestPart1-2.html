@@ -98,6 +98,7 @@
                     name="geoglocation"
                     value="" />
            </li><!--currently no input validation is used as the input validation would be different for US and non-US locations-->
+           <!-- bmc: I'm including minimal input validation on this - just to get some information from the user. -->
          </ul>
 
          <input type="submit"
@@ -110,108 +111,193 @@
 
     </div>
     <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function(){ // when the DOM is fully loaded
-
+      document.addEventListener("DOMContentLoaded", function(){
+            // bmc: when the submit button is clicked, the inputs get validated
             document.getElementById("submit_btn").onclick = function (){
-              var userName = document.getElementById("userName").value;
-                console.log("we show the username is " + userName);
-              var passWord = document.getElementById("password").value;
-                console.log("we show the password is " + passWord);
-              if (validateUserName()) {
+
+              var alertWords = "";
+
+              if (!validateUserName()) {
+                console.log("username NOT okay");
+                alertWords += "Your username must contain a lower case letter, an upper case letter and a number. Please don't use special characters like  !, @, #, $, *, or _.";
+              }
+              if (!validatePassWord()) {
+                console.log("password NOT okay");
+                alertWords += "need better password"; // bmc: need nicer words
+              }
+
+              if (!validateUserNumber()) {
+                console.log("usernumber NOT okay");
+                alertWords += "need better usernumber"; // bmc: need nicer words
+              }
+
+              if (!validateGeoLoc) {
+                console.log("geolocation NOT okay");
+                alertWords += "need better geolocation"; // bmc: need nicer words
+              }
+
+              if (alertWords = "") {
                 document.getElementById("loginform").submit();
-                console.log("username is okay");
-                alert("username is okay");
+                alertWords = "Thank you! Your information has been submitted.";
               }
               else {
-                console.log("it's not working 283");
-                alert("its not working 283");
-              };
-              if (validatePassWord) {
-                // continue on
+                alert(alertWords);
+                // bmc: Would be nice to keep the inputs in the blanks so user can make corrections. Add this if I have time.
               }
-              else {
-                // reject all and ask for the password again
-              }
+            }; // bmc: end of submit_btn.onclick function
 
-            };
+            // bmc: These are the functions used in the above onclick function
 
+// bmc: ********************* validate username *********************
+            // bmc: It must have cap, lower and number AND uses no special characters
             function validateUserName() {
-              console.log("this is getting validated");
+              console.log("validateUserName() launched");
+
               var userName = document.getElementById("userName").value;
                 console.log("userName is " + userName);
-                console.log(goodChars(userName));
-                console.log(badChars(userName));
 
-                var allGood1 = goodChars(userName);
-                  console.log(allGood1);
-                var allGood2 = !badChars(userName);
-                  console.log(allGood2);
-                if (allGood1 && allGood2) {
-                  console.log("it's all good");
+                var itHasNumbers = haveNumbers(userName);
+                  console.log("variable itHasNumbers has :" + itHasNumbers);
+                var itHasCaps = haveCaps(userName);
+                  console.log("variable itHasCaps has: " + itHasCaps);
+                var itHasLowers = haveLowers(userName);
+                  console.log(itHasLowers);
+                var itHasNoSpecialChars = !haveSpecialChars(userName);
+                  console.log(itHasNoSpecialChars);
+
+                if (itHasNumbers && itHasCaps && itHasLowers && itHasNoSpecialChars) {
+                  console.log("username all good");
                   return true;
                 }
                 else {
                   return false;
                 }
-            }; // end of function validateUserName()
-              // badChars() is used in validateUserName()
-              function badChars(wordForTesting) {
-                var specialCheck = new RegExp(/\W/);
-                var underscoreCheck = /_/;
-                if (wordForTesting.match(specialCheck)) {
-                  console.log("we have a non word character");
-                  return true;
-                } // end of if (wordForTesting.match(specialCheck))
-                else if (wordForTesting.match(underscoreCheck)) {
-                  console.log("we have a DASH!");
-                  return true;
-                } // end of else if (wordForTesting.match(underscoreCheck))
-                else { // Marsha
-                  return false;
-                }; // end of else Marsha
-              }; // end of function badChars()
-              // goodChars() is used in validateUserName()
-              function goodChars(wordForTesting) {
+            }; // bmc: end of function validateUserName()
 
-                var capLetterCheck = new RegExp('[A-Z]');
-                var letterCheck = new RegExp('[a-z]');
-                var numberCheck = new RegExp('[0-9]');
-
-                if (wordForTesting.match(capLetterCheck)) {
-                  console.log("we have caps");
-                  if (wordForTesting.match(letterCheck)) {
-                    console.log("we have letters");
-                    if (wordForTesting.match(numberCheck)) {
-                      console.log("we have numbers");
-                      return true;
-                    }
-                    else {
-                      return false;
-                    };
-                  }
-                  else {
-                    return false;
-                  };
-                }
-                  else {
-                    return false;
-                  };
-                } // end of function goodChars(wordForTesting)
-                // spreadsheet for thoroughly testing that this works: https://docs.google.com/spreadsheets/d/1_mnW95JzcmB3CPrr2wIX1ijIpNymYdBHgcs0hUrkvWM/edit?usp=sharing
-
+// bmc: ********************* validate password *********************
             function validatePassWord() {
+              console.log("validatethePassword() launched");
+              var thePassword = document.getElementById("password").value;
+                console.log("password is " + thePassword);
 
+                var itHasXNumbers = haveXNumbers(thePassword, 2);
+                var itHasXChars = numberOfChars(thePassword);
+
+                if ((itHasXChars < 8 || itHasXChars > 15) && itHasXNumbers) {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+
+            } // bmc: end of function validatePassWord()
+
+// bmc: ********************* validate usernumber *********************
+
+            function validateUserNumber() {
+              console.log("validateUserNumber() launched");
+              var theUserNumber = document.getElementById("usernumber").value;
+                console.log("the user number is " + theUserNumber);
+
+                var itHasOnlyNumbers = haveOnlyNumbers(theUserNumber);
+                var itHasXChars = numberOfChars(theUserNumber);
+
+                if (itHasXChars = 36 && itHasOnlyNumbers) {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+            } // bmc: end of function validateUserNumber()
+
+// bmc: ********************* validate geolocation *********************
+
+            function validateGeoLoc() {
+              console.log("validateGeoLoc() launched");
+              var theGeoLoc = document.getElementById("geoglocation");
+                console.log("the location is " + theGeoLoc);
+
+                var itHasXChars = numberOfChars(theGeoLoc);
+
+                if (itHasXChars > 1) {
+                  return true;
+                }
+                else {
+                  return false;
+                }
+            } // bmc: end of function validateGeoLoc()
+
+// bmc: ********************* supporting functions *********************
+
+            function haveXNumbers(stringForTesting, n) {
+              // bmc: Need this, I'm returning true for now to test the rest
+              return true;
+            }
+
+            function haveNumbers(stringForTesting) {
+              var numberCheck = new RegExp('[0-9]');
+              if (stringForTesting.match(numberCheck)) {
+                console.log("we have numbers");
+                return true;
+              }
+              else {
+                return false;
+              }
+            }
+
+            function haveOnlyNumbers() {
+              // bmc: Need this, I'm returning true for now to test the rest
+              return true;
+            }
+
+            function numberOfChars(stringForTesting) {
+              return stringForTesting.length;
+            }
+
+            function haveSpecialChars(stringForTesting) {
+              var specialCheck = new RegExp(/\W/);
+              var underscoreCheck = /_/;
+              if (stringForTesting.match(specialCheck)) {
+                console.log("we have a non word character");
+                return true;
+              }
+              else if (stringForTesting.match(underscoreCheck)) {
+                console.log("we have a DASH!");
+                return true;
+              }
+              else {
+                return false;
+              };
             }
 
 
+            function haveCaps(stringForTesting) {
+              var capLetterCheck = new RegExp('[A-Z]');
+              if (stringForTesting.match(capLetterCheck)) {
+                console.log("we have caps");
+                return true;
+              }
+              else {
+                return false;
+              }
+            }
+
+            function haveLowers(stringForTesting) {
+              var letterCheck = new RegExp('[a-z]');
+              if (stringForTesting.match(letterCheck)) {
+                console.log("we have letters");
+                return true;
+              }
+              else {
+                return false;
+              }
+            }
+
+
+
+
+
       }); // end of document.addEventListener("DOMContentLoaded", function()
-
-
-
-
-
-
-
 
     </script>
   </body>
