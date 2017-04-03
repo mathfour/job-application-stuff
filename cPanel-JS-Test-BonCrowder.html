@@ -1,16 +1,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Bon Crowder, aka bmc, cPanel UI Developer Javascript Test Submission</title>
+    <title>cPanel UI Developer Javascript Test Submission for Bon Crowder</title>
     <!-- Sorry about the inline css. We would normally use external css but wanted to only have a single file for the test -->
     <!-- bmc: That's totally fine. Simplicity is in the eye of the beholder. AKA Let the situation guide you, not the rules. -->
+    <!-- bmc: Comments are noted by my initials.  -->
+    <!-- bmc: Call for clarification: 713-557-8048. -->
+    <!-- bmc: This is for the YUI bits. -->
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
 
-    <!-- bmc: all methods and members defined by developer have an initial lower case letter and a second uppercase letter -->
-
-
+    <!-- bmc: This is the given CSS along with a bit of my own. -->
     <style type="text/css">
         label {
             width: 155px;
@@ -42,62 +43,342 @@
             padding: 0;
             cursor: pointer;
         }
+
+        .pixBox {
+          border: solid 1px gray;
+          padding: 10px;
+          width: 300px;
+          text-align: center;
+        }
     </style>
 </head>
 
 <body>
-    <div id="intro">
-        <h1>cPanel Javascript Skills Assessment</h1>
-        <p>Please complete and return this test as a file attachment. Feel free to remove the test instructions before submitting for a better looking page. To complete this test, you must accomplish the following:</p>
-        <ul>
-            <li>Part 1: Add form / input validation to the registrationform div with Javascript. Please do not use a JavaScript library to do form validation.</li>
-            <li>Part 2: Create a javascript based pop up container using the <a href="http://developer.yahoo.com/yui/">YUI library</a> that displays the contents of http://www.cpanel.net when the <i>Find out More</i> button is activated.</li>
-            <li>Part 3: Remove every third element from the array listed below using Javascript and without creating a new array.</li>
-            <li>Part 4: Parse this <a href="http://www.flickr.com/services/feeds/photos_public.gne?tags=punctuation,atsign&format=json">Flickr JSON feed</a> without using eval() and output a picture and description for the each photo in the feed into a div
-                when the show pictures button is clicked</li>
-        </ul>
-    </div>
-    <div id="registrationform">
-        <h2>Part 1: Register your cPanel Software</h2>
-        <form action="register.cgi" method="POST" name="loginform">
-            <input type="hidden" name="action" value="register" />
-            <ul class="nobullet">
-                <li><label for="username">Desired user name</label><input type="text" id="username" name="username" value="" /></li>
-                <!--must contain a lower and upper case letter and at least 1 number. Cannot contain special characters -->
-                <li><label for="password">Password</label><input type="password" id="password" name="password" value="" /></li>
-                <!--must contain at least 2 numbers and be 8 to 15 characters in length-->
-                <li><label for="usernumber">User Number</label><input type="text" id="usernumber" name="usernumber" value="" /></li>
-                <!--must be 36 digits and have no non-numeral characters-->
-                <li><label for="geoglocation">Geographic Location</label><input type="text" id="geoglocation" name="geoglocation" value="" /></li>
-                <!--currently no input validation is used as the input validation would be different for US and non-US locations-->
-            </ul>
-            <input type="submit" alt="register" name="register" value="Register" id="submit_btn" />
-        </form>
-    </div>
+  <div id="registrationform">
+    <h2>Part 1: Register your cPanel Software</h2>
+
+      <form  action="#"
+             method="POST"
+             name="loginform"
+             id="loginform">
+
+      <input type="hidden"
+             name="action"
+             value="register" />
+
+      <ul class="nobullet">
+         <li>
+           <label for="userName">Desired user name</label>
+           <input type="text"
+                  id="userName"
+                  name="userName"
+                  value="" />
+         </li><!--must contain a lower and upper case letter and at least 1 number. Cannot contain special characters -->
+
+         <li>
+           <label for="password">Password</label>
+           <input type="password"
+                  id="password"
+                  name="password"
+                  value="" />
+         </li><!--must contain at least 2 numbers and be 8 to 15 characters in length-->
+
+         <li>
+           <label for="usernumber">User Number</label>
+           <input type="text"
+                  id="usernumber"
+                  name="usernumber"
+                  value="" />
+         </li><!--must be 36 digits and have no non-numeral characters-->
+
+         <li>
+           <label for="geoglocation">Geographic Location</label>
+           <input type="text"
+                  id="geoglocation"
+                  name="geoglocation"
+                  value="" />
+         </li><!--currently no input validation is used as the input validation would be different for US and non-US locations-->
+         <!-- bmc: I'm including minimal input validation on this - just to get some information from the user. -->
+       </ul>
+
+       <input type="submit"
+              alt="register"
+              name="register"
+              value="Register"
+              id="submit_btn" />
+     </form>
+  </div>
+
+  <div id="partTwo">
     <h2>Part 2: cPanel.net</h2>
     <p>cPanel is a leading Web Hosting Control Panel Software provider supplying hosting automation tools to numerous data centers and customers all around the world. cPanel offers web hosting software that automates the intricate workings of web hosting
         servers. cPanel products are used on tens of thousands of servers worldwide to equip server administrators with the tools they need to provide top notch hosting to their customers. Since our beginnings in 1997, cPanel has been setting the standard
         for web hosting automation.</p>
     <input type="button" id="findoutmore" value="Find Out More" />
     <br /><br />
-    <script type="text/javascript">
-        var thisArray = ['T', 'h', 'a', 'i', 's', 'b', ' ', 'i', 'c', 's', ' ', 'a', 't', 'h', 'e', 'e', ' ', 't', 's', 'o', 'r', 'n', 'g', 't', ' ', 't', 'n', 'h', 'a', 's', 't', ' ', 'o', 'n', 'e', 'o', 'v', 'e', 'a', 'r', ' ', 'f', 'e', 'n', 'a',
-            'd', 's', 'p', ',', ' ', 'p', 'y', 'e', 'i', 's', ' ', 'p', 'i', 't', 'o', ' ', 'g', ' ', 'o', 'e', 'i', 's', ' ', 't', 'o', 'n', 'e', ' ', 'a', ' ', 'n', 'd', ' ', ' ', 'o', 'i', 'n', ' ', 'a', 'm', 'y', ' ', ' ', 'f', 'a', 'r', 'i',
-            ' ', 'e', 'n', 'o', 'd', 's', 'i', ' ', 'S', ' ', 'o', 'm', 'a', 'e', ' ', 'a', 'p', 'e', ' ', 'o', 'p', 'a', 'l', 'e', 'r', ' ', 's', ' ', 't', 'a', 'a', 'r', 't', ' ', 'e', 'd', 'u', ' ', 's', ' ', 'i', 'n', 'g', 'g', 'i', ' ', 'n',
-            'g', 'o', ' ', 'i', 't', 't', ',', ' ', ' ', 'n', 'i', 'o', 't', 'h', ' ', 'k', 'a', 'n', 'o', ' ', 'w', 'i', ' ', 'n', 'g', 'o', ' ', 'w', 'r', 'h', 'a', 'i', 't', ' ', 's', 'i', 't', 'h', ' ', 'w', 'r', 'a', 's', 'h', ' ', 'A', ' ',
-            'n', 'd', 'a', ' ', 't', 'o', 'h', 'e', ' ', 'y', ' ', 'a', 'w', 'i', 'p', 'l', 'l', 'o', ' ', 'c', 'r', 'o', 'n', ' ', 't', 'i', 'p', 'n', 'u', 'i', 'e', ' ', 't', 's', 'i', ' ', 'n', 'g', ' ', 'i', 'n', ' ', 'g', ' ', 's', 'i', 't',
-            'h', ' ', 'f', 'r', 'o', 'r', ' ', 'e', 'v', 't', 'e', 'r', 't', ' ', 'j', 'u', 'u', 's', 't', 't', ' ', 'a', 'b', 'e', 'l', 'c', 'a', ' ', 'u', 's', 'l', 'e'
-        ];
-        var len = thisArray.length;
-        document.write("<br /><h2>Part 3: The Array:</h2>");
-        for (var i = 1; i <= len; i++) {
-            document.write(thisArray[i]);
-        }
-    </script>
+  </div>
+
+  <div class="partThree">
+    <h2>Part 3: The Array:</h2>
+    <div id="showingTheArray"></div>
     <br /><br />
+  </div>
+
+  <div id="partFour">
     <h2>Part 4: Flickr Photos</h2>
     <p>Click on the button to see where it's _______.</p>
+    <!-- bmc: Clever! (and inspiring - I even uploaded my own atsign!)-->
     <input type="button" id="flickrpics" value="Show Pictures" />
+  </div>
+  <br />
+  <div id="pictures"></div>
+
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        // bmc: when the submit button is clicked, the inputs get validated
+      document.getElementById("submit_btn").onclick = function (){
+        // bmc: This var is preparing for the alert to the user.
+        var alertWords = "";
+
+        // bmc: Validate each part using the methods farther down.
+        // bmc: Append alertWords to the alert as necessary.
+        // bmc: This prevents users getting too annoyed.
+        if (!validateUserName()) {
+          alertWords += "Your username must contain a lower case letter, an upper case letter and a number. Please don't use special characters like  !, @, #, $, *, or _. \n \n";
+        };
+
+        if (!validatePassWord()) {
+          alertWords += "Your password should be between 8 and 15 characters and have at least 2 numerals. \n \n";
+        };
+
+        if (!validateUserNumber()) {
+          alertWords += "Your User Number should be exactly 36 digits. \n \n";
+        };
+
+        if (!validateGeoLoc()) {
+          alertWords += "Please include a location of some kind - at least 2 characters. \n \n";
+        };
+
+        if (alertWords === "") {
+          document.getElementById("loginform").submit();
+          alertWords = "Thank you! Your information has been submitted.";
+        };
+          alert(alertWords);
+          // bmc: Would be nice to keep the inputs in the blanks so user can make corrections. Add this if I have time.
+      }; // bmc: end of submit_btn.onclick function
+
+// bmc: Below are used in the above onclick validation functions
+
+// bmc: ********************* validate username *********************
+      function validateUserName() {
+
+        var userName = document.getElementById("userName").value;
+
+        var itHasNumbers = haveNumbers(userName);
+        var itHasCaps = haveCaps(userName);
+        var itHasLowers = haveLowers(userName);
+        var itHasNoSpecialChars = !haveSpecialChars(userName);
+
+        if (itHasNumbers && itHasCaps && itHasLowers && itHasNoSpecialChars) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      }; // bmc: end of function validateUserName()
+
+// bmc: ********************* validate password *********************
+      function validatePassWord() {
+        var thePassword = document.getElementById("password").value;
+
+        var itHasXNumbers = haveXNumbers(thePassword, 2);
+        var itHasXChars = numberOfChars(thePassword);
+
+        if (itHasXChars > 7 && itHasXChars < 16){
+          var theRightLength = true;
+        };
+        if (theRightLength && itHasXNumbers) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }; // bmc: end of function validatePassWord()
+
+// bmc: ********************* validate usernumber *********************
+      function validateUserNumber() {
+        var theUserNumber = document.getElementById("usernumber").value;
+
+        var itHasOnlyNumbers = haveOnlyNumbers(theUserNumber);
+        var itHasXChars = numberOfChars(theUserNumber);
+
+        if (itHasXChars === 36 && itHasOnlyNumbers) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      }; // bmc: end of function validateUserNumber()
+
+// bmc: ********************* validate geolocation *********************
+
+      function validateGeoLoc() {
+        var theGeoLoc = document.getElementById("geoglocation").value;
+
+          var itHasXChars = numberOfChars(theGeoLoc);
+
+          if (itHasXChars > 1) {
+            return true;
+          }
+          else {
+            return false;
+          };;
+      }; // bmc: end of function validateGeoLoc()
+
+// bmc: ********************* supporting functions *********************
+
+      function haveXNumbers(stringForTesting, n) {
+        var countTheDigits = 0;
+        for (i = 0; i < stringForTesting.length; i++) {
+          var thisChar = stringForTesting.charAt(i);
+          if (Number(thisChar) == thisChar) {
+            countTheDigits ++;
+          };
+        };
+        if (countTheDigits > n-1) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      };
+
+      function haveNumbers(stringForTesting) {
+        var numberCheck = new RegExp('[0-9]');
+        if (stringForTesting.match(numberCheck)) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      };
+
+      function haveOnlyNumbers(stringForTesting) {
+        var numCheck = new RegExp(/[^0-9]/);
+        if (stringForTesting.match(numCheck)) {
+          console.log("it has a letter!");
+          return false;
+        }
+        else {
+          return true;
+        };
+      };
+
+      function numberOfChars(stringForTesting) {
+        return stringForTesting.length;
+      }; // bmc: I used the sub-function for consistency of notation above
+
+      function haveSpecialChars(stringForTesting) {
+        var specialCheck = new RegExp(/\W/);
+        var underscoreCheck = /_/;
+        if (stringForTesting.match(specialCheck)) {
+          return true;
+        }
+        else if (stringForTesting.match(underscoreCheck)) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      };
+
+
+      function haveCaps(stringForTesting) {
+        var capLetterCheck = new RegExp('[A-Z]');
+        if (stringForTesting.match(capLetterCheck)) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      };
+
+      function haveLowers(stringForTesting) {
+        var letterCheck = new RegExp('[a-z]');
+        if (stringForTesting.match(letterCheck)) {
+          return true;
+        }
+        else {
+          return false;
+        };
+      };
+
+      // bmc: This is for part 2: using YUI.
+      YUI().use('node', function(Y) {
+        var button = Y.one("#findoutmore");
+
+        button.on("click", function (e) {
+          window.open('http://www.cpanel.net', '_blank', 'width=700, height=700');
+        });
+      });
+
+      // bmc: This is for part 3: the annoying song array exercise :D
+      var thisArray = ['T', 'h', 'a', 'i', 's', 'b', ' ', 'i', 'c', 's', ' ', 'a', 't', 'h', 'e', 'e', ' ', 't', 's', 'o', 'r', 'n', 'g', 't', ' ', 't', 'n', 'h', 'a', 's', 't', ' ', 'o', 'n', 'e', 'o', 'v', 'e', 'a', 'r', ' ', 'f', 'e', 'n', 'a',
+          'd', 's', 'p', ',', ' ', 'p', 'y', 'e', 'i', 's', ' ', 'p', 'i', 't', 'o', ' ', 'g', ' ', 'o', 'e', 'i', 's', ' ', 't', 'o', 'n', 'e', ' ', 'a', ' ', 'n', 'd', ' ', ' ', 'o', 'i', 'n', ' ', 'a', 'm', 'y', ' ', ' ', 'f', 'a', 'r', 'i',
+          ' ', 'e', 'n', 'o', 'd', 's', 'i', ' ', 'S', ' ', 'o', 'm', 'a', 'e', ' ', 'a', 'p', 'e', ' ', 'o', 'p', 'a', 'l', 'e', 'r', ' ', 's', ' ', 't', 'a', 'a', 'r', 't', ' ', 'e', 'd', 'u', ' ', 's', ' ', 'i', 'n', 'g', 'g', 'i', ' ', 'n',
+          'g', 'o', ' ', 'i', 't', 't', ',', ' ', ' ', 'n', 'i', 'o', 't', 'h', ' ', 'k', 'a', 'n', 'o', ' ', 'w', 'i', ' ', 'n', 'g', 'o', ' ', 'w', 'r', 'h', 'a', 'i', 't', ' ', 's', 'i', 't', 'h', ' ', 'w', 'r', 'a', 's', 'h', ' ', 'A', ' ',
+          'n', 'd', 'a', ' ', 't', 'o', 'h', 'e', ' ', 'y', ' ', 'a', 'w', 'i', 'p', 'l', 'l', 'o', ' ', 'c', 'r', 'o', 'n', ' ', 't', 'i', 'p', 'n', 'u', 'i', 'e', ' ', 't', 's', 'i', ' ', 'n', 'g', ' ', 'i', 'n', ' ', 'g', ' ', 's', 'i', 't',
+          'h', ' ', 'f', 'r', 'o', 'r', ' ', 'e', 'v', 't', 'e', 'r', 't', ' ', 'j', 'u', 'u', 's', 't', 't', ' ', 'a', 'b', 'e', 'l', 'c', 'a', ' ', 'u', 's', 'l', 'e'
+      ];
+
+      var len = thisArray.length-1;
+
+      // bmc: If we count and delete from the front, we get off count.
+      // bmc: Instead, we'll count and delete elements from the back.
+      for (var i = len; i > -1; i--) {
+        if (i%3 === 2) {
+          thisArray.splice(i,1);
+        };
+      };
+
+      // bmc: To look at it, we'll create a string
+      var annoyingSong = thisArray.join("");
+
+      var theSong = document.getElementById("showingTheArray");
+      theSong.innerHTML = annoyingSong;
+
+    function jsonFlickrFeed (jsonCodeFeed) {
+      var pixDiv = document.getElementById("pictures");
+      var htmlBits = "<p></p>";
+      // = '<p> <a href="' + jsonCodeFeed.link+ '">' +
+      //   jsonCodeFeed.title + '</a>'+ '</p>';
+      for (i = 0; i < jsonCodeFeed.items.length; i++) {
+        htmlBits += '<div class="pixBox"' + jsonCodeFeed.items[i].description + '</div><br />';
+      }
+      pixDiv.innerHTML = htmlBits;
+    }
+
+
+
+    function makeItSo() {
+      var head_element = document.getElementsByTagName("head")[0];
+      var newScript = document.createElement("script");
+      newScript.type = "text/javascript";
+      newScript.src = "http://www.flickr.com/services/feeds/photos_public.gne?tags=punctuation,atsign&format=json";
+      head_element.appendChild(newScript);
+    }
+
+    // click the button and Captain Picard says...
+    document.getElementById("flickrpics").onclick = function (){
+      makeItSo();
+    };
+
+
+    }); // end of document.addEventListener("DOMContentLoaded", function()
+
+  </script>
+
+
 </body>
 
 </html>

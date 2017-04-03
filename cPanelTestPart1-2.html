@@ -142,11 +142,11 @@
                 document.getElementById("loginform").submit();
                 alertWords = "Thank you! Your information has been submitted.";
                 console.log("variable alertWords contains: " + alertWords);
-              }
-              else {
+              };
+
                 console.log("variable alertWords contains: " + alertWords);
                 alert(alertWords);
-              };
+
                 // bmc: Would be nice to keep the inputs in the blanks so user can make corrections. Add this if I have time.
             }; // bmc: end of submit_btn.onclick function
 
@@ -213,7 +213,7 @@
                 var itHasXChars = numberOfChars(theUserNumber);
                   console.log("the variable itHasXChars contains " + itHasXChars);
 
-                if (itHasXChars = 36 && itHasOnlyNumbers) {
+                if (itHasXChars === 36 && itHasOnlyNumbers) {
                   console.log("we have x characters and only numbers");
                   console.log("userNUMBER all good");
                   return true;
@@ -227,7 +227,7 @@
 
             function validateGeoLoc() {
               console.log("validateGeoLoc() launched");
-              var theGeoLoc = document.getElementById("geoglocation");
+              var theGeoLoc = document.getElementById("geoglocation").value;
                 console.log("the location is " + theGeoLoc);
 
                 var itHasXChars = numberOfChars(theGeoLoc);
@@ -276,14 +276,14 @@
             };
 
             function haveOnlyNumbers(stringForTesting) {
-              // bmc: Need this, I'm returning true for now to test the rest
-              if (Number.isInteger(stringForTesting) && stringForTesting > 1) {
-                console.log("number is positive integer");
-                return true;
-              }
-              else {
+              var numCheck = new RegExp(/[^0-9]/);
+              if (stringForTesting.match(numCheck)) {
+                console.log("it has a letter!");
                 return false;
               }
+              else {
+                return true;
+              };
             };
 
             function numberOfChars(stringForTesting) {
